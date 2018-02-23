@@ -106,6 +106,7 @@ $(function () {
         }
         // draw map
         radar.map();
+        radar.grid();
 
         drawPlayers();
         drawItems();

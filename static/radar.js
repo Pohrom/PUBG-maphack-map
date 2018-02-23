@@ -95,6 +95,44 @@ Radar.prototype.map = function () {
     this.ctx.drawImage(this.mapImage, 0, 0);
 }
 
+Radar.prototype.grid = function () {
+    for (let x = 0; x <= 79; x++){
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, 8130/80 * x);
+        this.ctx.lineTo(8130, 8130/80 * x);
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
+        this.ctx.stroke();
+    }
+
+    for (let y = 0; y <= 79; y++){
+        this.ctx.beginPath();
+        this.ctx.moveTo(8130/80 * y, 0);
+        this.ctx.lineTo(8130/80 * y, 8130);
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
+        this.ctx.stroke();
+    }
+
+    for (let x = 0; x <= 7; x++){
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, 8130/8 * x);
+        this.ctx.lineTo(8130, 8130/8 * x);
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = "rgba(0,0,0,1)";
+        this.ctx.stroke();
+    }
+
+    for (let y = 0; y <= 7; y++){
+        this.ctx.beginPath();
+        this.ctx.moveTo(8130/8 * y, 0);
+        this.ctx.lineTo(8130/8 * y, 8130);
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = "rgba(0,0,0,1)";
+        this.ctx.stroke();
+    }
+}
+
 Radar.prototype.clear = function () {
     var p1 = this.ctx.transformedPoint(0, 0);
     var p2 = this.ctx.transformedPoint(this.canvas.width, this.canvas.height);
