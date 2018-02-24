@@ -95,6 +95,17 @@ Radar.prototype.map = function () {
     this.ctx.drawImage(this.mapImage, 0, 0);
 }
 
+Radar.prototype.indicate = function (fromX, fromY, toX, toY) {
+    let posStart = this.coords2Pos(fromX, fromY);
+    let posEnd = this.coords2Pos(toX, toY);
+    this.ctx.beginPath();
+    this.ctx.moveTo(posStart.X, posStart.Y);
+    this.ctx.lineTo(posEnd.X, posEnd.Y);
+    this.ctx.lineWidth = 1 / this.scaledFactor;
+    this.ctx.strokeStyle = "rgba(255,0,0,0.4)";
+    this.ctx.stroke();
+}
+
 Radar.prototype.grid = function () {
     for (let x = 0; x <= 79; x++){
         this.ctx.beginPath();

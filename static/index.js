@@ -108,8 +108,8 @@ $(function () {
         radar.map();
         radar.grid();
 
-        drawPlayers();
         drawItems();
+        drawPlayers();
         drawVehicles();
         drawMisc();
     }
@@ -118,28 +118,71 @@ $(function () {
         if (!locations.players) {
             return;
         }
+
         var players = locations.players;
+        let trackedPlayer = players[trackPlayerIndex];
+        let trackedTeam = players[trackPlayerIndex].t;
+
+        // draw indicator
+        for (var i = players.length - 1; i >= 0; i--) {
+            var player = players[i];
+            if (player.t !== trackedTeam && player.hp != 0) {
+                // draw indicator
+                radar.indicate(trackedPlayer.x, trackedPlayer.y, player.x, player.y);
+            }
+        }
+
+        // hp == 0
         for (var i = players.length - 1; i >= 0; i--) {
             var player = players[i];
             var color = "";
-            if (i == trackPlayerIndex) {
-                color = '#00BB00';
-            } else if (players[trackPlayerIndex].t == player.t) {
-                color = '#0033BB';
-            } else {
-                color = '#ff0000';
-            }
             if (player.hp == 0) {
                 color = '#000000';
                 radar.dot(player.x, player.y, color);
-            } else {
+            }
+        }
+
+        // teammate
+        for (var i = players.length - 1; i >= 0; i--) {
+            var player = players[i];
+            var color = "";
+            if (i == trackPlayerIndex && player.hp != 0) {
+                color = '#00BB00';
                 if(player.r != 0){
                     radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
                 }
                 radar.dot(player.x, player.y, color);
-                radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray')
+                radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray');
+                radar.text(player.x, player.y, i + 1, 'white');
+            } else if (player.t == trackedTeam) {
+                color = '#0033BB';
+                if(player.r != 0){
+                    radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
+                }
+                radar.dot(player.x, player.y, color);
+                radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray');
+                radar.text(player.x, player.y, i + 1, 'white');
             }
-            radar.text(player.x, player.y, i + 1, 'white');
+        }
+
+        // enemy
+        for (var i = players.length - 1; i >= 0; i--) {
+            var player = players[i];
+            var color = "";
+
+            if (player.t != trackedTeam && player.hp != 0) {
+                color = '#FF0000';
+                if(player.r != 0){
+                    radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
+                }
+                radar.dot(player.x, player.y, color);
+                radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray');
+                // draw player dot text for our enemies
+                let rad = Math.atan2(player.x - trackedPlayer.x, trackedPlayer.y - player.y);
+                let angle = Math.floor((360 * rad / (2 * Math.PI) + 5) / 10);
+                angle += angle < 0? 36 : 0;
+                radar.text(player.x, player.y, angle, 'white');
+            }
         }
     }
 
