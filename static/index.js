@@ -30,7 +30,7 @@ $(function () {
         redraw();
     });
     var locations = {};
-    var trackPlayerIndex = parseInt(Utils.getParameterByName('id') || 0);
+    var trackPlayerIndex = parseInt(Utils.getParameterByName('id') || 1) - 1;
 
     var maps = ['mapErangel.jpg', 'mapMiramar.jpg'];
     var mapParameter = Utils.getParameterByName('map');
