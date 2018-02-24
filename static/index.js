@@ -139,7 +139,7 @@ $(function () {
                 radar.dot(player.x, player.y, color);
                 radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray')
             }
-            radar.text(player.x, player.y, i, 'white');
+            radar.text(player.x, player.y, i + 1, 'white');
         }
     }
 
