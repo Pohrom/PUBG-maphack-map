@@ -126,7 +126,7 @@ $(function () {
         // draw indicator
         for (var i = players.length - 1; i >= 0; i--) {
             var player = players[i];
-            if (player.t !== trackedTeam && player.hp != 0) {
+            if (player.t !== trackedTeam && player.hp != 0 && player.r != 0) {
                 // draw indicator
                 radar.indicate(trackedPlayer.x, trackedPlayer.y, player.x, player.y);
             }
@@ -145,20 +145,15 @@ $(function () {
         // teammate
         for (var i = players.length - 1; i >= 0; i--) {
             var player = players[i];
-            var color = "";
-            if (i == trackPlayerIndex && player.hp != 0) {
-                color = '#00BB00';
-                if(player.r != 0){
-                    radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
-                }
+            if (i == trackPlayerIndex && player.hp != 0 && player.r != 0) {
+                var color = '#00BB00';
+                radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
                 radar.dot(player.x, player.y, color);
                 radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray');
                 radar.text(player.x, player.y, i + 1, 'white');
-            } else if (player.t == trackedTeam) {
-                color = '#0033BB';
-                if(player.r != 0){
-                    radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
-                }
+            } else if (player.t == trackedTeam && player.r != 0) {
+                var color = '#0033BB';
+                radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
                 radar.dot(player.x, player.y, color);
                 radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray');
                 radar.text(player.x, player.y, i + 1, 'white');
@@ -168,13 +163,9 @@ $(function () {
         // enemy
         for (var i = players.length - 1; i >= 0; i--) {
             var player = players[i];
-            var color = "";
-
-            if (player.t != trackedTeam && player.hp != 0) {
-                color = '#FF0000';
-                if(player.r != 0){
-                    radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
-                }
+            if (player.t != trackedTeam && player.hp != 0 && player.r != 0) {
+                var color = '#FF0000';
+                radar.lineWithAngle(player.x, player.y, 15, 6, player.r, color);
                 radar.dot(player.x, player.y, color);
                 radar.pieChart(player.x, player.y, ((100 - player.hp) / 100), 'gray');
                 // draw player dot text for our enemies
