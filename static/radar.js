@@ -100,7 +100,7 @@ Radar.prototype.grid = function () {
         this.ctx.beginPath();
         this.ctx.moveTo(0, 8130/80 * x);
         this.ctx.lineTo(8130, 8130/80 * x);
-        this.ctx.lineWidth = 1;
+        this.ctx.lineWidth = 1 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
         this.ctx.stroke();
     }
@@ -109,7 +109,7 @@ Radar.prototype.grid = function () {
         this.ctx.beginPath();
         this.ctx.moveTo(8130/80 * y, 0);
         this.ctx.lineTo(8130/80 * y, 8130);
-        this.ctx.lineWidth = 1;
+        this.ctx.lineWidth = 1 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
         this.ctx.stroke();
     }
@@ -118,7 +118,7 @@ Radar.prototype.grid = function () {
         this.ctx.beginPath();
         this.ctx.moveTo(0, 8130/8 * x);
         this.ctx.lineTo(8130, 8130/8 * x);
-        this.ctx.lineWidth = 3;
+        this.ctx.lineWidth = 3 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(0,0,0,1)";
         this.ctx.stroke();
     }
@@ -127,7 +127,7 @@ Radar.prototype.grid = function () {
         this.ctx.beginPath();
         this.ctx.moveTo(8130/8 * y, 0);
         this.ctx.lineTo(8130/8 * y, 8130);
-        this.ctx.lineWidth = 3;
+        this.ctx.lineWidth = 3 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(0,0,0,1)";
         this.ctx.stroke();
     }
