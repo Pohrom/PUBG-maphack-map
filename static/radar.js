@@ -222,12 +222,12 @@ Radar.prototype.text = function (x, y, content, color) {
 }
 
 // useless
-// Radar.prototype.floatText = function (posX, posY, content, color) {
-//     this.ctx.font = '' + 8 / this.scaledFactor + 'pt Calibri';
-//     this.ctx.fillStyle = color || 'lightgreen';
-//     this.ctx.textAlign = 'left';
-//     this.ctx.fillText(content, posX - this.viewPortOffset.X, posY - this.viewPortOffset.Y);
-// }
+Radar.prototype.floatText = function (posX, posY, content, color) {
+    this.ctx.font = '' + 8 / this.scaledFactor + 'pt Calibri';
+    this.ctx.fillStyle = color || 'lightgreen';
+    this.ctx.textAlign = 'left';
+    this.ctx.fillText(content, posX - this.viewPortOffset.X, posY - this.viewPortOffset.Y);
+}
 
 // from https://github.com/jerrytang67/helloworld
 Radar.prototype.lineWithAngle = function (x, y, length, width, angle, color) {

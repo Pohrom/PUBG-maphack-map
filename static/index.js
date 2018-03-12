@@ -204,6 +204,6 @@ $(function () {
     }
 
     function drawMisc() {
-        // radar.floatText(0, 10, "Update: " + socketUpdateCounter.getPerSec() + "ps");
+         radar.floatText(0, 10, "Update: " + socketUpdateCounter.getPerSec() + " fps");
     }
 });
