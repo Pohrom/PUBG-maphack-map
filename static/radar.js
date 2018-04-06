@@ -198,6 +198,17 @@ Radar.prototype.dot = function (x, y, color, width) {
     this.ctx.fill();
 }
 
+Radar.prototype.arc = function (x, y, r,lineWidth,strokeStyle, fillStyle) {   
+    var pos = this.coords2Pos(x, y);
+    this.ctx.beginPath();
+    this.ctx.arc(pos.X, pos.Y, this.game2Pix(r), 0, 360, false);
+    this.ctx.lineWidth = lineWidth||5;
+    this.ctx.strokeStyle=strokeStyle || "white";
+    this.ctx.stroke();
+    this.ctx.fillStyle=fillStyle || "rgba(125,125,125,0.5)";
+    this.ctx.fill();
+}
+
 Radar.prototype.pieChart = function (x, y, percent, color) {
     var pos = this.coords2Pos(x, y);
     var radius = 7 / this.scaledFactor;
