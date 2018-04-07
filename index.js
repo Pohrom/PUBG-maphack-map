@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 var bodyParser = require('body-parser');
+var nano = require('nanomsg');
 
 var port = 7777;
 
@@ -25,10 +26,23 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-//  POST 请求
+// POST 请求
 app.post('/', function (req, res) {
     DUMPDATA = req.body;
     res.end('confirm');
+    for (var index = 0; index < CLIENTS.length; index++) {
+        var socket = CLIENTS[index];
+        socket.emit('update', DUMPDATA);
+    }
+});
+
+// nanomsg
+var bus = nano.socket('bus');
+var addr = 'tcp://*:5731'
+bus.bind(addr);
+
+bus.on('data', function (buf) {
+    DUMPDATA = JSON.parse(String(buf));
     for (var index = 0; index < CLIENTS.length; index++) {
         var socket = CLIENTS[index];
         socket.emit('update', DUMPDATA);
