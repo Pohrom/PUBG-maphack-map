@@ -32,12 +32,14 @@ $(function () {
     var locations = {};
     var trackPlayerIndex = parseInt(Utils.getParameterByName('id') || 1) - 1;
 
-    var maps = ['mapErangel.jpg', 'mapMiramar.jpg'];
+    var maps = ['mapErangel.jpg', 'mapMiramar.jpg', 'mapSavage.png'];
     var mapParameter = Utils.getParameterByName('map');
     if (mapParameter === '1') {
         radar.setMap(maps[0]);
     } else if (mapParameter === '2') {
         radar.setMap(maps[1]);
+    } else if (mapParameter === '3') {
+        radar.setMap(maps[2]);
     } else {
         radar.setMap(maps[Math.random() < .5 ? 1 : 0]);
     }
