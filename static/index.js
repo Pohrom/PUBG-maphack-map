@@ -122,7 +122,7 @@ $(function () {
         let gamestate = locations.gamestate;
         radar.arc(gamestate.spx, gamestate.spy, gamestate.sr, 1, "rgba(255,255,255,0.5)", "rgba(0,0,0,0)");
         radar.arc(gamestate.bpx, gamestate.bpy, gamestate.br, 1, "rgba(0,0,255,0.5)", "rgba(0,0,0,0)");
-        radar.arc(gamestate.rpx, gamestate.rpy, gamestate.rr, 1, "rgba(120,0,0,0.2)", "rgba(120,0,0,0.2)");
+        radar.arc(gamestate.rpx, gamestate.rpy, gamestate.rr, 1, "rgba(120,0,0,0.2)", "rgba(120,0,0,0.1)");
     }
 
     function drawPlayers() {
