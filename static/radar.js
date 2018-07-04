@@ -109,8 +109,8 @@ Radar.prototype.indicate = function (fromX, fromY, toX, toY) {
 Radar.prototype.grid = function () {
     for (let x = 0; x <= 79; x++){
         this.ctx.beginPath();
-        this.ctx.moveTo(0, 8190/80 * x);
-        this.ctx.lineTo(8190, 8190/80 * x);
+        this.ctx.moveTo(0, 8192/80 * x);
+        this.ctx.lineTo(8192, 8192/80 * x);
         this.ctx.lineWidth = 1 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
         this.ctx.stroke();
@@ -118,26 +118,26 @@ Radar.prototype.grid = function () {
 
     for (let y = 0; y <= 79; y++){
         this.ctx.beginPath();
-        this.ctx.moveTo(8190/80 * y, 0);
-        this.ctx.lineTo(8190/80 * y, 8190);
+        this.ctx.moveTo(8192/80 * y, 0);
+        this.ctx.lineTo(8192/80 * y, 8192);
         this.ctx.lineWidth = 1 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
         this.ctx.stroke();
     }
 
-    for (let x = 0; x <= 7; x++){
+    for (let x = 0; x <= 8; x++){
         this.ctx.beginPath();
-        this.ctx.moveTo(0, 8190/8 * x);
-        this.ctx.lineTo(8190, 8190/8 * x);
+        this.ctx.moveTo(0, 8192/8 * x);
+        this.ctx.lineTo(8192, 8192/8 * x);
         this.ctx.lineWidth = 3 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(0,0,0,1)";
         this.ctx.stroke();
     }
 
-    for (let y = 0; y <= 7; y++){
+    for (let y = 0; y <= 8; y++){
         this.ctx.beginPath();
-        this.ctx.moveTo(8190/8 * y, 0);
-        this.ctx.lineTo(8190/8 * y, 8190);
+        this.ctx.moveTo(8192/8 * y, 0);
+        this.ctx.lineTo(8192/8 * y, 8192);
         this.ctx.lineWidth = 3 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(0,0,0,1)";
         this.ctx.stroke();
@@ -178,7 +178,7 @@ Radar.prototype.setFocus = function (x, y) {
 
 // translates game coords to overlay coords
 Radar.prototype.game2Pix = function (p) {
-    return p * (8190 / 819000)
+    return p * (8192 / 819200)
 }
 
 Radar.prototype.coords2Pos = function (x, y) {
