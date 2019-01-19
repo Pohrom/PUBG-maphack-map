@@ -45,15 +45,20 @@ $(function() {
   ];
   var mapParameter = Utils.getParameterByName("map");
   if (mapParameter === "1") {
-    radar.setMap(maps[0]);
+    // Erangle
+    radar.setMap(maps[0], 8);
   } else if (mapParameter === "2") {
-    radar.setMap(maps[1]);
+    // Desert
+    radar.setMap(maps[1], 8);
   } else if (mapParameter === "3") {
-    radar.setMap(maps[2]);
+    // Sanhok
+    radar.setMap(maps[2], 3.984);
   } else if (mapParameter === "4") {
-    radar.setMap(maps[3]);
+    // Range
+    radar.setMap(maps[3], 1.992);
   } else if (mapParameter === "5") {
-    radar.setMap(maps[4]);
+    // Vikendi
+    radar.setMap(maps[4], 5.977);
   } else {
     radar.setMap(maps[Math.random() < 0.5 ? 1 : 0]);
   }

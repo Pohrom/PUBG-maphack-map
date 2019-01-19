@@ -1,4 +1,6 @@
 function Radar(canvas) {
+    this.mapScale = 8;
+    this.dpi = window.devicePixelRatio;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     trackTransforms(this.ctx);
@@ -87,12 +89,13 @@ function Radar(canvas) {
     }
 }
 
-Radar.prototype.setMap = function (map) {
+Radar.prototype.setMap = function (map, scale) {
     this.mapImage.src = map;
+    this.mapScale = scale;
 }
 
 Radar.prototype.map = function () {
-    this.ctx.drawImage(this.mapImage, 0, 0);
+    this.ctx.drawImage(this.mapImage, 0, 0, 8192, 8192);
 }
 
 Radar.prototype.indicate = function (fromX, fromY, toX, toY) {
@@ -107,37 +110,37 @@ Radar.prototype.indicate = function (fromX, fromY, toX, toY) {
 }
 
 Radar.prototype.grid = function () {
-    for (let x = 0; x <= 79; x++){
+    for (let x = 0; x <= 79; x++) {
         this.ctx.beginPath();
-        this.ctx.moveTo(0, 8192/80 * x);
-        this.ctx.lineTo(8192, 8192/80 * x);
+        this.ctx.moveTo(0, 8192 / 80 * x);
+        this.ctx.lineTo(8192, 8192 / 80 * x);
         this.ctx.lineWidth = 1 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
         this.ctx.stroke();
     }
 
-    for (let y = 0; y <= 79; y++){
+    for (let y = 0; y <= 79; y++) {
         this.ctx.beginPath();
-        this.ctx.moveTo(8192/80 * y, 0);
-        this.ctx.lineTo(8192/80 * y, 8192);
+        this.ctx.moveTo(8192 / 80 * y, 0);
+        this.ctx.lineTo(8192 / 80 * y, 8192);
         this.ctx.lineWidth = 1 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(255,255,255,0.65)";
         this.ctx.stroke();
     }
 
-    for (let x = 0; x <= 8; x++){
+    for (let x = 0; x <= 8; x++) {
         this.ctx.beginPath();
-        this.ctx.moveTo(0, 8192/8 * x);
-        this.ctx.lineTo(8192, 8192/8 * x);
+        this.ctx.moveTo(0, 8192 / 8 * x);
+        this.ctx.lineTo(8192, 8192 / 8 * x);
         this.ctx.lineWidth = 3 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(0,0,0,1)";
         this.ctx.stroke();
     }
 
-    for (let y = 0; y <= 8; y++){
+    for (let y = 0; y <= 8; y++) {
         this.ctx.beginPath();
-        this.ctx.moveTo(8192/8 * y, 0);
-        this.ctx.lineTo(8192/8 * y, 8192);
+        this.ctx.moveTo(8192 / 8 * y, 0);
+        this.ctx.lineTo(8192 / 8 * y, 8192);
         this.ctx.lineWidth = 3 / this.scaledFactor;
         this.ctx.strokeStyle = "rgba(0,0,0,1)";
         this.ctx.stroke();
@@ -178,7 +181,7 @@ Radar.prototype.setFocus = function (x, y) {
 
 // translates game coords to overlay coords
 Radar.prototype.game2Pix = function (p) {
-    return p * (8192 / 819200)
+    return p * (8192 / 819200) * 8 / this.mapScale // 1.338// * (8192 / 819200)// * (8/5.98)
 }
 
 Radar.prototype.coords2Pos = function (x, y) {
@@ -232,12 +235,13 @@ Radar.prototype.text = function (x, y, content, color) {
     this.ctx.fillText(content, pos.X, pos.Y + (3 / this.scaledFactor));
 }
 
-// useless
 Radar.prototype.floatText = function (posX, posY, content, color) {
-    this.ctx.font = '' + 8 / this.scaledFactor + 'pt Calibri';
+    this.ctx.font = '' + 10 / this.scaledFactor + 'pt Arial';
     this.ctx.fillStyle = color || 'lightgreen';
     this.ctx.textAlign = 'left';
-    this.ctx.fillText(content, posX - this.viewPortOffset.X, posY - this.viewPortOffset.Y);
+    let x = (posX - this.viewPortOffset.X);
+    let y = (posY - this.viewPortOffset.Y);
+    this.ctx.fillText(content, x, y);
 }
 
 // from https://github.com/jerrytang67/helloworld
